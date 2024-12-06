@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: crowdfunding
@@ -12,8 +15,5 @@ spring:
       dialect: mysql
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     show-sql: true
-
-server:
-  port: 8080
