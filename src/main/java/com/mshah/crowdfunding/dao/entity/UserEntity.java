@@ -14,6 +14,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -44,8 +46,10 @@ public class UserEntity {
     private String nickname;
 
     @Column(columnDefinition = "TIMESTAMP", updatable = false)
+    @CreationTimestamp
     private Instant createdAt;
 
     @Column(columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
     private Instant updatedAt;
 }
