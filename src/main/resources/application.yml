@@ -6,10 +6,9 @@ spring:
     name: crowdfunding
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/crowdfunding
+    url: jdbc:mysql://localhost:3306/crowdfundingdb
     username: root
     password: mika
-
   data:
     jdbc:
       dialect: mysql
@@ -17,3 +16,5 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
+  flyway:
+    locations: classpath:db/migration
