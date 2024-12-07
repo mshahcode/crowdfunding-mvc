@@ -1,4 +1,4 @@
-package com.mshah.crowdfunding.dao.config;
+package com.mshah.crowdfunding.config;
 
 
 import org.springframework.context.annotation.Bean;

@@ -1,23 +1,26 @@
 package com.mshah.crowdfunding.dao.entity;
 
 
-import com.mshah.crowdfunding.model.enums.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -39,10 +42,6 @@ public class UserEntity {
     @Column(columnDefinition = "TINYINT(1)")
     private Boolean isActive = true;
 
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private Role role = Role.USER;
-
     private String nickname;
 
     @Column(columnDefinition = "TIMESTAMP", updatable = false)
@@ -52,4 +51,14 @@ public class UserEntity {
     @Column(columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
     private Instant updatedAt;
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    @Builder.Default
+    @ToString.Exclude
+    private Set<RoleEntity> roles = new HashSet<>();
+
+    public void addRole(RoleEntity role) {
+        roles.add(role);
+    }
 }
