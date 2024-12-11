@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Crowdfunding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+    <link href="/css/signup.css" rel="stylesheet">
+</head>
+<body>
+
+<section id="signup-section" class="d-flex flex-column align-items-center justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-7 d-flex flex-column align-items-center justify-content-center">
+                <div id="signup-left">
+                    <h4>Sign Up</h4>
+                    <form id="loginForm" class="mt-4" th:action="@{/signup}" method="post" th:object="${registration}">
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="registerEmail">Email</label>
+                                    <input type="email" th:field="*{email}" class="form-control" id="registerEmail"
+                                           placeholder="Email address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="registerPassword">Password</label>
+                                    <input type="password" th:field="*{password}" class="form-control" id="registerPassword"
+                                           placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="registerNickname">Nickname</label>
+                                    <input type="text" th:field="*{nickname}" class="form-control" id="registerNickname"
+                                           placeholder="Nickname">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button id="logIn-button" type="submit" class="btn">Create an account</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="d-flex mt-3" style="border-top: 1px solid rgb(213, 205, 205);">
+                        <p class="p-1 mt-3">Already have an account?</p>
+                        <a class="ms-auto p-1 mt-3" th:href="@{/login}">Log In</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5 d-flex flex-column align-items-center justify-content-center text-center p-5">
+                <img src="https://www.creativefabrica.com/wp-content/uploads/2022/10/25/Crowdfunding-icon-Graphics-43230720-1.jpg" alt="Inspiration"
+                     style="border-radius: 50%; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);">
+                <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">Inspire Your Journey</h1>
+                <p style="font-size: 1.2rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                    Discover endless possibilities and bring your creative ideas to life. Join a community of
+                    like-minded individuals and turn dreams into reality.
+                </p>
+                <p style="font-size: 1rem; font-weight: 300; color: #8d8b8b;">
+                    Start your journey today with our powerful tools and resources, designed to make your goals
+                    achievable and your vision unstoppable.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

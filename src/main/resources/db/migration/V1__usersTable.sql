@@ -3,7 +3,6 @@ CREATE TABLE `users`
     `id`         int          NOT NULL AUTO_INCREMENT,
     `email`      varchar(150) NOT NULL,
     `password`   varchar(255) NOT NULL,
-    `role`       varchar(50)  NOT NULL DEFAULT 'USER',
     `created_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated_at` timestamp    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     `is_active`  tinyint      NOT NULL DEFAULT '1',

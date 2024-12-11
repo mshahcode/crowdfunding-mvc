@@ -20,13 +20,13 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public void saveUser(RegistrationDto registrationDto) {
-        log.info("UserServiceImpl.saveUser.start: saving user: {}", registrationDto.getEmail());
+    public void signUpUser(RegistrationDto registrationDto) {
+        log.info("UserServiceImpl.signUpUser.start: saving user: {}", registrationDto.getEmail());
 
         var userEntity = userMapper.registrationDtoToUserEntity(registrationDto, new RoleEntity(), passwordEncoder);
 
         userRepository.save(userEntity);
 
-        log.info("UserServiceImpl.saveUser.end: saved user: {}", registrationDto.getEmail());
+        log.info("UserServiceImpl.signUpUser.end: saved user: {}", registrationDto.getEmail());
     }
 }

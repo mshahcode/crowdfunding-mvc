@@ -4,5 +4,5 @@ import com.mshah.crowdfunding.model.dto.RegistrationDto;
 
 public interface UserService {
 
-    void saveUser(RegistrationDto registrationDto);
+    void signUpUser(RegistrationDto registrationDto);
 }

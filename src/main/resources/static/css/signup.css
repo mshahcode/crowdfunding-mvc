@@ -1,0 +1,66 @@
+body {
+    background-color: #F1F0EE;
+}
+
+#signup-section {
+    min-height: 100vh;
+}
+
+#signup-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+#signup-section #signup-left {
+    background-color: white;
+    width: 70%;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px 50px;
+}
+
+#signup-section input {
+    background-color: #F1F0EE;
+}
+
+#signup-section .btn {
+    background-color: #161616;
+    color: white;
+    padding: 5px 15px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: normal;
+    transition: all 0.8s ease;
+}
+
+#logIn-button:hover {
+    transform: scale(1.03);
+}
+
+#signup-section a {
+    color: #161616;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#signup-section label {
+    padding-bottom: 10px;
+}
+
+#signup-section .form-control {
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: none;
+}
+
+#signup-section .form-control:focus {
+    border: 1px solid #161616;
+}
+
+#signup-section img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}

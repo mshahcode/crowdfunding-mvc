@@ -21,14 +21,15 @@ public class AuthController {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String getRegisterForm(Model model) {
+    @GetMapping("/signup")
+    public String getSignUpForm(Model model) {
         model.addAttribute("registration", new RegistrationDto());
-        return "register";
+        return "signup";
     }
 
-    @PostMapping("/register")
-    public void register(@Valid @ModelAttribute("registration") RegistrationDto registrationDto) {
-        userService.saveUser(registrationDto);
+    @PostMapping("/signup")
+    public String signUpUser(@Valid @ModelAttribute("registration") RegistrationDto registrationDto) {
+        userService.signUpUser(registrationDto);
+        return "redirect:/login";
     }
 }
