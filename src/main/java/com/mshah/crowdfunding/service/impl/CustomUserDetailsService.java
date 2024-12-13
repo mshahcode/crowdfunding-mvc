@@ -3,7 +3,7 @@ package com.mshah.crowdfunding.service.impl;
 
 import com.mshah.crowdfunding.dao.entity.UserEntity;
 import com.mshah.crowdfunding.dao.repository.UserRepository;
-import com.mshah.crowdfunding.model.constant.Constants;
+import com.mshah.crowdfunding.model.constant.Constants.ErrorMessages;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -24,8 +24,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("CustomUserDetailsService.loadUserByUsername.start: Loading user by email: {}", email);
         UserEntity userEntity = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
-                            log.error("loadUserByUsername.error: User not found with email: {}", email);
-                            return new UsernameNotFoundException(String.format(Constants.USER_NOT_FOUND_MESSAGE, email));
+                            log.error("CustomUserDetailsService.loadUserByUsername.error:" +
+                                    " User not found with email: {}", email);
+                            return new UsernameNotFoundException(
+                                    String.format(ErrorMessages.USER_NOT_FOUND_MESSAGE, email));
                         }
                 );
 
