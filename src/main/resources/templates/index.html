@@ -3,17 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crowdfunding Project</title>
+    <title>Discover - Crowdfunding</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/global.css" rel="stylesheet">
+
+    <style>
+        .card {
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            box-shadow: 0 0 10px #32AA27;
+            border-color: #32AA27;
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .card-body p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            color: #595959;
+        }
+
+        .card-body a {
+            margin-top: auto;
+            font-weight: bold;
+            color: #595959;
+            text-decoration: none;
+        }
+
+        .card-body a:hover {
+            color: #32AA27;
+            text-decoration: none;
+        }
+    </style>
+
+
 </head>
 <body>
-<!-- Filter Form -->
-<div class="container-fluid mt-5">
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/v1/ideas}">CROWDFUNDING PROJECT</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/v1/ideas}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Manage Ideas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sign Out</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Section -->
+<div class="container-fluid mt-5" id="ideasMainSection">
+    <div class="row">
+        <div class="col-12 mb-3 text-center">
+            <h3 style="font-weight: bold">Discover Ideas!</h3>
+        </div>
+    </div>
     <div class="row">
         <!-- Sidebar: Filters -->
-        <div class="col-md-3">
-            <form method="get" th:action="@{/v1/ideas}" class="bg-light p-4 rounded">
+        <div class="col-md-3 mh-100" id="filterSideBar">
+            <form method="get" th:action="@{/v1/ideas}" class="p-4 rounded mt-3">
                 <h4>Filter Ideas</h4>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -59,13 +152,16 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-4 mb-4" th:each="ideaCard : ${ideaCards}">
-                    <div class="card">
+                    <div class="card p-3">
                         <img th:src="${ideaCard.imageUrl}" class="card-img-top" alt="Idea Image">
                         <div class="card-body text-center">
                             <h5 class="card-title" th:text="${ideaCard.name}">Idea Name</h5>
                             <p class="card-text">
                                 Goal: <span th:text="${ideaCard.goalAmount}">0.00</span><br>
                                 Raised: <span th:text="${ideaCard.currentAmount}">0.00</span>
+                            </p>
+                            <p class="mt-2">
+                                <a id="cardDetailsLink" th:href="@{/v1/ideas/{id}(id = ${ideaCard.id})}">Details</a>
                             </p>
                         </div>
                     </div>
@@ -74,6 +170,17 @@
         </div>
     </div>
 </div>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>&copy; 2023 Crowdfunding Project</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
