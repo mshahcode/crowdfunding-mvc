@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -21,7 +22,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/login", "/signup", "/css/**").permitAll()
+                        .requestMatchers("/login", "/signup", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login")
@@ -31,8 +32,8 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll())
                 .logout((logout) -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                        .logoutSuccessUrl("/login?logout=true")
                         .permitAll())
                 .build();
     }

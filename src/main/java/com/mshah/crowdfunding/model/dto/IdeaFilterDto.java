@@ -18,20 +18,19 @@ public class IdeaFilterDto {
     private String sortOrder;
 
     public void setName(String name) {
-        System.out.println(name);
-        if (name != null && !StringUtils.isBlank(name)) {
+        if (!StringUtils.isBlank(name)) {
             this.name = name;
         }
     }
 
     public void setCategory(String category) {
-        if (category != null && !StringUtils.isBlank(category)) {
+        if (!StringUtils.isBlank(category)) {
             this.category = category;
         }
     }
 
     public void setStatus(String status) {
-        if (status != null && !StringUtils.isBlank(status)) {
+        if (!StringUtils.isBlank(status)) {
             this.status = status;
         }
     }

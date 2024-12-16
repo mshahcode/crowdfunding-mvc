@@ -4,9 +4,9 @@ package com.mshah.crowdfunding.service.impl;
 import com.mshah.crowdfunding.dao.entity.UserEntity;
 import com.mshah.crowdfunding.dao.repository.UserRepository;
 import com.mshah.crowdfunding.model.constant.Constants.ErrorMessages;
+import com.mshah.crowdfunding.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,14 +31,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                         }
                 );
 
-        var userDetails = User.builder()
-                .username(userEntity.getEmail())
-                .password(userEntity.getPassword())
-                .roles(userEntity.getRoles()
-                        .stream()
-                        .map(role -> role.getName().name())
-                        .toArray(String[]::new))
-                .disabled(!userEntity.getIsActive())
+        var userDetails = CustomUserDetails.builder()
+                .userEntity(userEntity)
                 .build();
 
         log.info("CustomUserDetailsService.loadUserByUsername.end: Loaded user by email: {}", userEntity);
