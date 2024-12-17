@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover - Crowdfunding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+    <link href="/css/idea-details.css" rel="stylesheet">
+</head>
+<body>
+<div class="d-flex flex-column min-vh-100" id="pageContainer">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/v1/ideas}">Discover Ideas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Manage Ideas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="container mt-3 flex-grow-1" id="ideaDetails" style="background-color: #EEF1EF; border-radius: 40px;">
+        <div class="row">
+            <div class="col-12 mb-1 text-center">
+                <h3 style="font-weight: bold">Idea Details</h3>
+            </div>
+        </div>
+        <div class="row flex-wrap">
+            <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                <div>
+                    <img th:src="${ideaDto.imageUrl != null ? ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}"
+                         alt="idea image">
+                </div>
+                <a href="#">Fund this idea</a>
+
+            </div>
+
+            <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
+                <table>
+                    <tr>
+                        <td>Owner</td>
+                        <td th:text="${ideaDto.owner}"></td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td th:text="${ideaDto.name}"></td>
+                    </tr>
+                    <tr>
+                        <td>Category</td>
+                        <td th:text="${ideaDto.category}"></td>
+                    </tr>
+                    <tr>
+                        <td>Target Amount</td>
+                        <td th:text="${ideaDto.goalAmount} + '$'"></td>
+                    </tr>
+                    <tr>
+                        <td>Current Amount</td>
+                        <td th:text="${ideaDto.currentAmount} + '$'"></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Funds</td>
+                        <td th:text="${ideaDto.donationsCount}"></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td th:text="${ideaDto.description}"></td>
+                    </tr>
+                    <tr>
+                        <td>Creation Date</td>
+                        <td th:text="${#dates.format(ideaDto.createdAt, 'MM-dd-yyyy HH:mm:ss')}"></td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td th:if="${ideaDto.status == 'IN_PROGRESS'}">In Progress</td>
+                        <td th:if="${ideaDto.status == 'PROGRESS'}">Completed</td>
+                    </tr>
+                </table>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                         th:style="'width: ' + (${ideaDto.currentAmount} / ${ideaDto.goalAmount} * 100) + '%;'"
+                         th:text="${#numbers.formatDecimal(ideaDto.currentAmount / ideaDto.goalAmount * 100, 1, 2)} + '%'">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <footer class="text-center mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p>&copy; 2024 Crowdfunding Project</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

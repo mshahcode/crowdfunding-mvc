@@ -1,10 +1,10 @@
-document.addEventListener('DOMContentLoaded', function() {
+$(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('logout') && urlParams.get('logout') === 'true') {
-        const logoutRow = document.getElementById('logout-row');
-        logoutRow.style.display = 'block';
+    if (urlParams.has('logout') && urlParams.get('logout') === 'true') {
+        const $logoutRow = $('#logout-row');
+        $logoutRow.show();
         setTimeout(() => {
-            logoutRow.style.display = 'none';
+            $logoutRow.hide();
         }, 5_000);
     }
 });

@@ -1,0 +1,60 @@
+#ideaDetails {
+    padding: 20px;
+}
+
+#ideaDetails img {
+    border-radius: 12px;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+
+}
+
+#ideaDetails table {
+    width: 80%;
+    border-collapse: collapse;
+    border: none;
+    border-bottom: 1px solid #8d8b8b;
+    margin-top: 20px;
+}
+
+#ideaDetails table td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#ideaDetails table td:first-child {
+    font-weight: bold;
+}
+
+#ideaDetails a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #32AA27;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    border-radius: 0;
+
+}
+
+#ideaDetails a:hover {
+    transform: scale(1.01);
+    background-color: #2e5637;
+}
+
+.progress {
+    width: 80%;
+    height: 25px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.progress-bar {
+    font-weight: bold;
+    line-height: 25px;
+}
