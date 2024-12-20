@@ -45,8 +45,7 @@
                     <img th:src="${ideaDto.imageUrl != null ? ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}"
                          alt="idea image">
                 </div>
-                <a href="#">Fund this idea</a>
-
+                <a th:href="@{/v1/donations/ideas/{id}(id=${ideaDto.id})}">Fund this idea</a>
             </div>
 
             <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
@@ -99,7 +98,6 @@
 
             </div>
         </div>
-
     </div>
     <!-- Footer -->
     <footer class="text-center mt-4">
