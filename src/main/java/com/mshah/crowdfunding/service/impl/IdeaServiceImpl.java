@@ -1,6 +1,7 @@
 package com.mshah.crowdfunding.service.impl;
 
 import com.mshah.crowdfunding.dao.entity.UserEntity;
+import com.mshah.crowdfunding.dao.repository.DonationRepository;
 import com.mshah.crowdfunding.dao.repository.IdeaRepository;
 import com.mshah.crowdfunding.mapper.idea.IdeaMapper;
 import com.mshah.crowdfunding.model.dto.IdeaCardDto;
@@ -10,6 +11,7 @@ import com.mshah.crowdfunding.model.dto.NewIdeaDto;
 import com.mshah.crowdfunding.service.IdeaService;
 import com.mshah.crowdfunding.specification.Idea.IdeaSpecification;
 import com.mshah.crowdfunding.util.FileHelper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +25,7 @@ import java.util.List;
 public class IdeaServiceImpl implements IdeaService {
 
     private final IdeaRepository ideaRepository;
+    private final DonationRepository donationRepository;
     private final IdeaMapper ideaMapper;
     private final FileHelper fileHelper;
 
@@ -84,5 +87,18 @@ public class IdeaServiceImpl implements IdeaService {
         ideaRepository.save(idea);
 
         log.info("IdeaServiceImpl.createNewIdea.end: created new idea by user with id: {}", user.getId());
+    }
+
+    @Override
+    @Transactional
+    public void deleteIdea(Long id) {
+        log.info("IdeaServiceImpl.deleteIdea.start: deleting idea by id: {}", id);
+
+        var relatedDonations = donationRepository.findAllByIdeaId(id);
+        donationRepository.deleteAll(relatedDonations);
+
+        ideaRepository.deleteById(id);
+
+        log.info("IdeaServiceImpl.deleteIdea.end: deleted idea by id: {}", id);
     }
 }

@@ -89,4 +89,10 @@ public class IdeaController {
 
         return "redirect:/v1/ideas/manage";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteIdea(@PathVariable Long id) {
+        ideaService.deleteIdea(id);
+        return "redirect:/v1/ideas/manage";
+    }
 }

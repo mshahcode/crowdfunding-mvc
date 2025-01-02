@@ -17,4 +17,6 @@ public interface IdeaService {
     List<IdeaDto> getIdeasByUser(Integer userId);
 
     void createNewIdea(NewIdeaDto newIdeaDto, UserEntity user);
+
+    void deleteIdea(Long id);
 }

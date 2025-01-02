@@ -29,7 +29,7 @@
 
 #ideaDetails a {
     display: block;
-    width: 100%;
+    width: 90%;
     padding: 10px;
     background-color: #32AA27;
     font-weight: bold;
@@ -39,7 +39,35 @@
     text-decoration: none;
     transition: all 0.5s ease;
     border-radius: 0;
+}
+#ideaDetails form {
+    width: 100%;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+#ideaDetails form button {
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    background-color: darkred;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    border-radius: 0;
+    outline: none;
+}
+
+#ideaDetails form button:focus {
+    outline: none;
+}
+
+#ideaDetails form button:hover {
+    background-color: #590101;
+    transform: scale(1.005);
 }
 
 #ideaDetails a:hover {
@@ -51,10 +79,14 @@
     width: 80%;
     height: 25px;
     border-radius: 5px;
-    margin-top: 20px;
+    background-color: #aaa;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+
 }
 
 .progress-bar {
+    background-color: #32AA27;
     font-weight: bold;
     line-height: 25px;
 }
