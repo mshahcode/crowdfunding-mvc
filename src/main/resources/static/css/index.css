@@ -59,3 +59,20 @@
     color: #32AA27;
     text-decoration: none;
 }
+
+.btn {
+    background-color: #161616;
+    color: white;
+    padding: 5px 15px;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: normal;
+    transition: all 0.5s ease;
+
+}
+
+.btn:hover {
+    transform: scale(1.01);
+    color: white;
+
+}

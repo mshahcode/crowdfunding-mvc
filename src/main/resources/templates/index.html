@@ -84,7 +84,15 @@
                         <option value="desc" th:selected="${filter.sortOrder == 'desc'}">Descending</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Filter</button>
+                <div class="row d-flex gap-1">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-primary" th:href="@{/v1/ideas}">Reset</a>
+                    </div>
+                </div>
+
             </form>
         </div>
 

@@ -29,7 +29,7 @@
 
 #ideaDetails a {
     display: block;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     background-color: #32AA27;
     font-weight: bold;
@@ -71,7 +71,7 @@
 }
 
 #ideaDetails a:hover {
-    transform: scale(1.01);
+    transform: scale(1.005);
     background-color: #2e5637;
 }
 
