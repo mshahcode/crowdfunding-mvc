@@ -22,7 +22,7 @@
                     <a class="nav-link" th:href="@{/v1/ideas}">Discover Ideas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Ideas</a>
+                    <a class="nav-link" th:href="@{/v1/ideas/manage}">Manage Ideas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}">Log Out</a>
@@ -39,7 +39,7 @@
                 <h4>Fund an Idea</h4>
                 <form id="donationForm" class="mt-4" th:action="@{/v1/donations/ideas/{id}(id=${ideaDto.id})}"
                       method="post" th:object="${donationForm}">
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="amount" class="form-label">Amount</label>
                             <input type="number" th:field="*{amount}" class="form-control" id="amount"
@@ -52,14 +52,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="message" class="form-label">Message</label>
                             <textarea th:field="*{message}" class="form-control" id="message"
                                       placeholder="Leave a message"></textarea>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cardType" class="form-label">Card Type</label>
                             <select id="cardType" name="cardType" class="form-select">
@@ -68,7 +68,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cardNumber" class="form-label">Card Number</label>
                             <input th:field="*{cardNumber}" class="form-control" id="cardNumber"
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cardCvv" class="form-label">Card CVV</label>
                             <input th:field="*{cardCvv}" class="form-control" id="cardCvv"
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-3">
                         <div class="col">
                             <label for="cardExpDate" class="form-label">Card Expiration</label>
                             <input th:type="month" th:field="*{cardExpDate}" class="form-control"
@@ -117,8 +117,8 @@
             </div>
             <div class="col-md-6 d-flex flex-column text-center p-5"
                  id="donationRightSide">
-                <img th:src="${ideaDto.imageUrl != null ? ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}"
-                     alt="idea image">
+                <img class="card-img-top" alt="Idea Image"
+                     th:src="${ideaDto.imageUrl != null ? '/images/ideas/' + ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}">
 
                 <div class="d-flex flex-column justify-content-center align-items-center text-center p-5">
                     <table class="table mt-4">

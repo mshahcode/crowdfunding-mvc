@@ -1,9 +1,11 @@
 package com.mshah.crowdfunding.mapper.idea;
 
 import com.mshah.crowdfunding.dao.entity.Idea;
+import com.mshah.crowdfunding.dao.entity.UserEntity;
 import com.mshah.crowdfunding.model.dto.DonationFormDto;
 import com.mshah.crowdfunding.model.dto.IdeaCardDto;
 import com.mshah.crowdfunding.model.dto.IdeaDto;
+import com.mshah.crowdfunding.model.dto.NewIdeaDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -25,4 +27,10 @@ public interface IdeaMapper {
             idea.setStatus(COMPLETED);
         }
     }
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "user", source = "user")
+    Idea mapToIdeaEntity(NewIdeaDto newIdeaDto, UserEntity user);
 }

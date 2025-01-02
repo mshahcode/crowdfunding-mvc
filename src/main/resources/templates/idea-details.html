@@ -22,7 +22,7 @@
                         <a class="nav-link" th:href="@{/v1/ideas}">Discover Ideas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Manage Ideas</a>
+                        <a class="nav-link" th:href="@{/v1/ideas/manage}">Manage Ideas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/logout}">Log Out</a>
@@ -42,8 +42,8 @@
         <div class="row flex-wrap">
             <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
                 <div>
-                    <img th:src="${ideaDto.imageUrl != null ? ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}"
-                         alt="idea image">
+                    <img alt="Idea Image"
+                         th:src="${ideaDto.imageUrl != null ? '/images/ideas/' + ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}">
                 </div>
                 <a th:href="@{/v1/donations/ideas/{id}(id=${ideaDto.id})}">Fund this idea</a>
             </div>

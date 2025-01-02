@@ -52,11 +52,8 @@ public class DonationController {
             Model model
     ) {
 
-        System.out.println(donationFormDto);
-
         if (bindingResult.hasErrors()) {
-            var ideaDto = ideaService.getIdeaById(id);
-            model.addAttribute("ideaDto", ideaDto);
+            model.addAttribute("ideaDto", ideaService.getIdeaById(id));
             model.addAttribute("activeUser", customUserDetails.getUserEntity());
             return "donation-form";
         }

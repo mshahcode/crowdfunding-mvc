@@ -25,7 +25,7 @@
                     <a class="nav-link" th:href="@{/v1/ideas}">Discover Ideas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Ideas</a>
+                    <a class="nav-link" th:href="@{/v1/ideas/manage}">Manage Ideas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}">Log Out</a>
@@ -96,7 +96,7 @@
                          style="cursor: pointer;"
                          th:data-url="@{/v1/ideas/{id}(id=${ideaCard.id})}">
                         <img class="card-img-top" alt="Idea Image"
-                             th:src="${ideaCard.imageUrl != null ? ideaCard.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}">
+                             th:src="${ideaCard.imageUrl != null ? '/images/ideas/' + ideaCard.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}">
                         <div class="card-body text-center">
                             <h5 class="card-title" th:text="${ideaCard.name}">Idea Name</h5>
                             <p class="card-text">

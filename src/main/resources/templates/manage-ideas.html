@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Ideas - Crowdfunding</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/global.css" rel="stylesheet">
+    <style>
+        #ideaDetails {
+            padding: 20px;
+        }
+
+        #ideaDetails img {
+            border-radius: 12px;
+            height: auto;
+            object-fit: cover;
+            width: 100%;
+
+        }
+
+        #ideaDetails table {
+            width: 80%;
+            border-collapse: collapse;
+            border: none;
+            margin-top: 20px;
+        }
+
+        #ideaDetails table td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #ideaDetails table td:first-child {
+            font-weight: bold;
+        }
+
+        #ideaDetails a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-weight: bold;
+            color: #32AA27;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.5s ease;
+            border-radius: 0;
+
+        }
+
+        #ideaDetails a:hover {
+            transform: scale(1.01);
+            background-color: #449a3c;
+            color: white;
+        }
+
+        .btn {
+            background-color: #161616;
+            color: white;
+            padding: 5px 15px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: normal;
+            transition: all 0.5s ease;
+
+        }
+
+        .btn:hover {
+            transform: scale(1.01);
+            color: white;
+
+        }
+
+        .form-control {
+            border-radius: 5px;
+            box-shadow: none;
+        }
+
+        .form-control:focus {
+            border: 1px solid #161616;
+        }
+
+        .form-label {
+            padding-left: 3px;
+        }
+
+        ul {
+            list-style: none;
+            margin: 3px;
+            color: red;
+            padding-left: 3px;
+        }
+
+        #ideaDetails table {
+            width: 80%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: white;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #ideaDetails table th {
+            background-color: #32AA27;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #ideaDetails table td {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #ideaDetails table td:first-child {
+            font-weight: bold;
+        }
+
+        #ideaDetails table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        #ideaDetails table a {
+            color: #32AA27;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 15px;
+            transition: all 0.5s ease;
+        }
+
+        #ideaDetails table a:hover {
+
+            color: white;
+            border-radius: 15px;
+        }
+
+        li {
+            padding: 0;
+            margin: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="d-flex flex-column min-vh-100" id="pageContainer">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/v1/ideas}">Discover Ideas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/v1/ideas/manage}">Manage Ideas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <div class="container mt-3 flex-grow-1" id="ideaDetails" style="background-color: #EEF1EF; border-radius: 40px;">
+        <div class="row">
+            <div class="col-12 mb-2 text-center">
+                <h3 style="font-weight: bold">Idea Management</h3>
+            </div>
+        </div>
+        <div class="row flex-wrap">
+
+            <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                <div style="width: 100%;">
+                    <h4>Have an Idea ?</h4>
+                    <p style="font-weight: bold; color: #32AA27;">Share your idea with the world and get funded</p>
+                </div>
+
+                <form id="newIdeaForm" class="mt-1" th:action="@{/v1/ideas/new}" style="width: 100%;"
+                      method="post" enctype="multipart/form-data" th:object="${newIdea}">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" th:field="*{name}" class="form-control" id="name"
+                                   placeholder="Enter idea's name">
+                            <div th:if="${#fields.hasErrors('name')}">
+                                <ul>
+                                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category" name="category" class="form-select">
+                                <option value="Tech">Tech</option>
+                                <option value="Health">Health</option>
+                                <option value="Education">Education</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="goalAmount" class="form-label">Goal Amount</label>
+                            <input type="number" th:field="*{goalAmount}" class="form-control" id="goalAmount"
+                                   placeholder="Enter goal amount" step="0.01">
+                            <div th:if="${#fields.hasErrors('goalAmount')}">
+                                <ul>
+                                    <li style="text-decoration: none;" th:each="err : ${#fields.errors('goalAmount')}"
+                                        th:text="${err}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="image" class="form-label">Idea's Image</label>
+                            <input type="file" th:field="*{image}" class="form-control" id="image" accept="image/*">
+                            <div th:if="${#fields.hasErrors('image')}">
+                                <ul>
+                                    <li style="text-decoration: none;" th:each="err : ${#fields.errors('image')}"
+                                        th:text="${err}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea th:field="*{description}" class="form-control" id="description"
+                                      placeholder="Enter idea's description"></textarea>
+                            <div th:if="${#fields.hasErrors('description')}">
+                                <ul>
+                                    <li style="text-decoration: none;" th:each="err : ${#fields.errors('description')}"
+                                        th:text="${err}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-center">
+                            <button id="new-idea-button" type="submit" class="btn">Create an Idea</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-8 d-flex flex-column align-items-center text-center">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Creation Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="idea : ${currentUserIdeas}">
+                        <td>
+                            <a th:href="@{/v1/ideas/{id}(id=${idea.id})}" th:text="${idea.name}"></a>
+                        </td>
+                        <td th:text="${idea.category}"></td>
+                        <td style="color: black;" th:if="${idea.status == 'IN_PROGRESS'}">In Progress</td>
+                        <td style="color: #32AA27;" th:if="${idea.status == 'COMPLETED'}">Completed</td>
+                        <td th:text="${#dates.format(idea.createdAt, 'MM-dd-yyyy HH:mm:ss')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" id="donated-section">
+            <div class="col text-center">
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p>&copy; 2024 Crowdfunding Project</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">CROWDFUNDING PROJECT</a>
+        <a class="navbar-brand" th:href="@{/login}">CROWDFUNDING PROJECT</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -73,7 +73,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="email"></label>
-                                <input type="text" name="email" class="form-control" id="email"
+                                <input type="email" name="email" class="form-control" id="email"
                                        placeholder="Email address" required>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="password"></label>
-                                <input type="password"  name="password" class="form-control" id="password"
+                                <input type="password" name="password" class="form-control" id="password"
                                        placeholder="Password" required>
                             </div>
                         </div>
@@ -92,7 +92,8 @@
                         <div class="col">
                             <div class="d-flex  align-items-center justify-content-center gap-5">
                                 <button id="logIn-button" type="submit" class="btn" style="padding: 5px 15px;">Log
-                                    In</button>
+                                    In
+                                </button>
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                     <a class="logIn-links mt-3" th:href="@{/signup}">Sign Up</a>
                                     <a class="logIn-links mt-3" href="#">Forgot your password?</a>
