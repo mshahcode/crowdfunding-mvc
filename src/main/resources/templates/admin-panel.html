@@ -114,6 +114,12 @@
                             <td>
                                 <button class="btn btn-sm">Edit</button>
                                 <button class="btn btn-sm">Delete</button>
+                                <form style="display:inline;" th:if="${user.isActive != true}" th:action="@{/v1/users/activate/{id}(id=${user.id})}" method="post">
+                                    <button  class="btn btn-sm">Activate</button>
+                                </form>
+                                <form style="display:inline;" th:if="${user.isActive == true}" th:action="@{/v1/users/deactivate/{id}(id=${user.id})}" method="post">
+                                    <button  class="btn btn-sm">Deactivate</button>
+                                </form>
                             </td>
                         </tr>
                         </tbody>

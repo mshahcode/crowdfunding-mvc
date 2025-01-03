@@ -66,4 +66,33 @@ public class UserServiceImpl implements UserService {
         log.info("UserServiceImpl.getTotalActiveUsersCount.end: fetched total active users count: {}", totalActiveUsersCount);
         return totalActiveUsersCount;
     }
+
+    @Override
+    public void activateUser(Long id) {
+        log.info("UserServiceImpl.activateUser.start: activating user with id: {}", id);
+
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        user.setIsActive(true);
+
+        userRepository.save(user);
+
+        log.info("UserServiceImpl.activateUser.end: activated user with id: {}", id);
+    }
+
+    @Override
+    public void deActivateUser(Long id) {
+        log.info("UserServiceImpl.deActivateUser.start: deactivating user with id: {}", id);
+
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        user.setIsActive(false);
+
+        userRepository.save(user);
+
+        log.info("UserServiceImpl.deActivateUser.end: deactivated user with id: {}", id);
+
+    }
 }

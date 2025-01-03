@@ -14,4 +14,8 @@ public interface UserService {
     long getTotalUsersCount();
 
     long getTotalActiveUsersCount();
+
+    void activateUser(Long id);
+
+    void deActivateUser(Long id);
 }
