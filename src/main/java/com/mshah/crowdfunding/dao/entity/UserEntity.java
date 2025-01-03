@@ -1,6 +1,7 @@
 package com.mshah.crowdfunding.dao.entity;
 
 
+import com.mshah.crowdfunding.model.enums.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +22,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -60,5 +62,9 @@ public class UserEntity {
 
     public void addRole(RoleEntity role) {
         roles.add(role);
+    }
+
+    public Set<String> getRolesAsStrings() {
+        return roles.stream().map(RoleEntity::getName).map(Role::name).collect(Collectors.toSet());
     }
 }
