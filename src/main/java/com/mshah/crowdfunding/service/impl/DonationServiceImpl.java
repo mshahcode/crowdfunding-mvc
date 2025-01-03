@@ -33,6 +33,11 @@ public class DonationServiceImpl implements DonationService {
             return new RuntimeException("Idea not found with id: " + ideaId);
         });
 
+        if (idea.getUserId().equals(user.getId())) {
+            log.error("DonationServiceImpl.donateToAnIdea.error: User cannot donate to their own idea");
+            throw new RuntimeException("User cannot donate to their own idea");
+        }
+
         donationHelper.validateDonation(idea, donationDto);
 
         var donation = donationMapper.mapToDonationEntity(idea, user, donationDto);

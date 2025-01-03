@@ -1,5 +1,6 @@
 package com.mshah.crowdfunding.model.dto;
 
+import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +26,7 @@ public class NewIdeaDto {
 
     @NotNull(message = "Goal amount is required")
     @DecimalMin(value = "100", message = "Goal amount must be at least 100$")
+    @DecimalMax(value = "1000000", message = "Goal amount must be at most 1,000,000$")
     private BigDecimal goalAmount;
 
     private MultipartFile image;
