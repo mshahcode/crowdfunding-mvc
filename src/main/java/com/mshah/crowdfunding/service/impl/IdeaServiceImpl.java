@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.mshah.crowdfunding.model.enums.IdeaStatus.COMPLETED;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -100,5 +102,16 @@ public class IdeaServiceImpl implements IdeaService {
         ideaRepository.deleteById(id);
 
         log.info("IdeaServiceImpl.deleteIdea.end: deleted idea by id: {}", id);
+    }
+
+    @Override
+    public long getTotalCompletedIdeasCount() {
+        log.info("IdeaServiceImpl.getTotalCompletedIdeasCount.start: fetching total completed ideas count");
+
+        var totalCompletedIdeasCount = ideaRepository.countByStatus(COMPLETED);
+
+        log.info("IdeaServiceImpl.getTotalCompletedIdeasCount.end: fetched total completed ideas count: {}", totalCompletedIdeasCount);
+
+        return totalCompletedIdeasCount;
     }
 }

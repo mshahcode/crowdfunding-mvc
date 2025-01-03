@@ -10,4 +10,8 @@ public interface UserService {
     void signUpUser(RegistrationDto registrationDto);
 
     List<UserDto> getAllUsers();
+    
+    long getTotalUsersCount();
+
+    long getTotalActiveUsersCount();
 }

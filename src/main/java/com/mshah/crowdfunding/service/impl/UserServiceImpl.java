@@ -45,4 +45,25 @@ public class UserServiceImpl implements UserService {
 
         return users;
     }
+
+    @Override
+    public long getTotalUsersCount() {
+        log.info("UserServiceImpl.getTotalUsersCount.start: fetching total users count");
+
+        var totalUsersCount = userRepository.count();
+
+        log.info("UserServiceImpl.getTotalUsersCount.end: fetched total users count: {}", totalUsersCount);
+
+        return totalUsersCount;
+    }
+
+    @Override
+    public long getTotalActiveUsersCount() {
+        log.info("UserServiceImpl.getTotalActiveUsersCount.start: fetching total active users count");
+
+        var totalActiveUsersCount = userRepository.countByIsActive(true);
+
+        log.info("UserServiceImpl.getTotalActiveUsersCount.end: fetched total active users count: {}", totalActiveUsersCount);
+        return totalActiveUsersCount;
+    }
 }

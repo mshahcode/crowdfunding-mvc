@@ -65,7 +65,7 @@
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total Users</h5>
-                            <p class="card-text">150</p>
+                            <p class="card-text" th:text="${totalUsersCount}"></p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class="card text-white bg-success mb-3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Active Users</h5>
-                            <p class="card-text">25</p>
+                            <p class="card-text" th:text="${totalActiveUsersCount}"></p>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     <div class="card text-white bg-warning mb-3">
                         <div class="card-body text-center">
                             <h5 class="card-title">Completed Projects</h5>
-                            <p class="card-text">10</p>
+                            <p class="card-text" th:text="${totalCompletedIdeasCount}"></p>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,9 @@
                                         <option value="DONATIONS_INFO">Donations Data</option>
                                     </select>
                                 </div>
-                                <button style="background-color: #161616;" type="submit" class="btn btn-sm">Send Request</button>
+                                <button style="background-color: #161616;" type="submit" class="btn btn-sm">Send
+                                    Request
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -168,7 +170,8 @@
                                     <td th:text="${report.status}"></td>
                                     <td th:text="${#dates.format(report.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
                                     <td>
-                                        <a th:if="${report.status.name() != 'ERROR' && report.status.name() != 'IN_PROGRESS'}" th:href="@{'/v1/reports/' + ${report.id} + '/download'}"
+                                        <a th:if="${report.status.name() != 'ERROR' && report.status.name() != 'IN_PROGRESS'}"
+                                           th:href="@{'/v1/reports/' + ${report.id} + '/download'}"
                                            class="btn btn-sm">Download</a>
                                     </td>
                                 </tr>

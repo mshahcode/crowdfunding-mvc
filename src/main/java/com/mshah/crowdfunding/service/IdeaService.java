@@ -19,4 +19,6 @@ public interface IdeaService {
     void createNewIdea(NewIdeaDto newIdeaDto, UserEntity user);
 
     void deleteIdea(Long id);
+
+    long getTotalCompletedIdeasCount();
 }

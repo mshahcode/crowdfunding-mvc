@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT u FROM UserEntity u JOIN FETCH u.roles")
     List<UserEntity> findAllUsersWithRoles();
+
+    long countByIsActive(boolean isActive);
+
 }
