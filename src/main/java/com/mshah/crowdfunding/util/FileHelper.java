@@ -52,7 +52,7 @@ public class FileHelper {
 
             return Optional.of(fileName);
         } catch (IOException e) {
-            log.error("FileUtility.uploadFile.error: Error while uploading file", e);
+            log.error("FileUtility.uploadFile.error: Error while uploading file {}", file.getOriginalFilename(), e);
             throw new RuntimeException("Error while uploading file", e);
         }
 

@@ -82,7 +82,7 @@ public class IdeaServiceImpl implements IdeaService {
             var uploadedFilePath = fileHelper.uploadFile(newIdeaDto.getImage(), ideaUploadDir).orElse(null);
             idea.setImageUrl(uploadedFilePath);
         } catch (Exception e) {
-            log.error("IdeaServiceImpl.createNewIdea.error: error while uploading image for idea: {}", idea.getName());
+            log.error("IdeaServiceImpl.createNewIdea.error: error while uploading image for idea: {}", idea.getName(), e);
             throw new RuntimeException("Error while uploading image for idea: " + idea.getName(), e);
         }
 

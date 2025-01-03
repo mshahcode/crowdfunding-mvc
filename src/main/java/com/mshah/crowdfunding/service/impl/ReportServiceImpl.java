@@ -61,7 +61,7 @@ public class ReportServiceImpl implements ReportService {
 
             log.info("ReportServiceImpl.generateCSV.end: Report generated");
         } catch (Exception e) {
-            log.error("ReportServiceImpl.generateCSV.error: Error generating report: {}", e.getMessage());
+            log.error("ReportServiceImpl.generateCSV.error:", e);
             report.setStatus(ReportStatus.ERROR);
             reportRepository.save(report);
         }

@@ -12,8 +12,6 @@ public class ReportGeneratorFactory {
 
 
     public ReportStrategy getReportStrategy(String reportType) {
-        System.out.println("ReportGeneratorFactory.getReportStrategy reportType: " + reportType);
-        System.out.println("ReportGeneratorFactory.getReportStrategy reportType: " + reportStrategies);
         var generator = reportStrategies.get(reportType);
         if (generator == null) {
             throw new IllegalArgumentException("Report type not supported: " + reportType);

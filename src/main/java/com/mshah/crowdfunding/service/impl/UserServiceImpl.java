@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 
             userRepository.deleteById(id);
         } catch (Exception e) {
-            log.error("UserServiceImpl.deleteUser.error: error while deleting user with id: {}", id);
+            log.error("UserServiceImpl.deleteUser.error: error while deleting user with id: {}", id, e);
             throw new RuntimeException("Error while deleting user with id: " + id, e);
         }
 

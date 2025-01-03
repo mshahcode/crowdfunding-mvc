@@ -26,7 +26,7 @@ public class DonationHelper {
             donation.setCardNumber(EncryptionUtil.encrypt(donation.getCardNumber()));
             donation.setCardCvv(EncryptionUtil.encrypt(donation.getCardCvv()));
         } catch (Exception e) {
-            log.error("DonationHelper.encryptDonation.error: Error while encrypting card number for donation");
+            log.error("DonationHelper.encryptDonation.error: Error while encrypting card number for donation", e);
             throw new RuntimeException("Error while encrypting card number for donation", e);
         }
     }
