@@ -1,6 +1,7 @@
 package com.mshah.crowdfunding.dao.repository;
 
 import com.mshah.crowdfunding.dao.entity.Idea;
+import com.mshah.crowdfunding.dao.entity.UserEntity;
 import com.mshah.crowdfunding.model.enums.IdeaStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -15,7 +16,9 @@ public interface IdeaRepository extends JpaRepository<Idea, Long>, JpaSpecificat
     @Query(value = """
             SELECT * FROM ideas WHERE user_id = :userId
             """, nativeQuery = true)
-    List<Idea> findByUserId(Integer userId);
+    List<Idea> findByUserId(Long userId);
 
     long countByStatus(IdeaStatus status);
+
+    Long user(UserEntity user);
 }

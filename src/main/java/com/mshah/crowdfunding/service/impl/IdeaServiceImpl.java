@@ -66,7 +66,7 @@ public class IdeaServiceImpl implements IdeaService {
     public List<IdeaDto> getIdeasByUser(Integer userId) {
         log.info("IdeaServiceImpl.getIdeasByUser.start: fetching ideas by user with id: {}", userId);
 
-        var ideaDtos = ideaRepository.findByUserId(userId).stream().map(ideaMapper::mapToIdeaDto).toList();
+        var ideaDtos = ideaRepository.findByUserId(userId.longValue()).stream().map(ideaMapper::mapToIdeaDto).toList();
 
         log.info("IdeaServiceImpl.getIdeasByUser.end: fetched ideas by user with id: {}", userId);
         return ideaDtos;

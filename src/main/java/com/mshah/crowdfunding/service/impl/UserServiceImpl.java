@@ -1,11 +1,15 @@
 package com.mshah.crowdfunding.service.impl;
 
 import com.mshah.crowdfunding.dao.entity.RoleEntity;
+import com.mshah.crowdfunding.dao.repository.DonationRepository;
+import com.mshah.crowdfunding.dao.repository.IdeaRepository;
+import com.mshah.crowdfunding.dao.repository.ReportRepository;
 import com.mshah.crowdfunding.dao.repository.UserRepository;
 import com.mshah.crowdfunding.mapper.user.UserMapper;
 import com.mshah.crowdfunding.model.dto.RegistrationDto;
 import com.mshah.crowdfunding.model.dto.UserDto;
 import com.mshah.crowdfunding.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +23,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final DonationRepository donationRepository;
+    private final ReportRepository reportRepository;
+    private final IdeaRepository ideaRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -95,4 +102,29 @@ public class UserServiceImpl implements UserService {
         log.info("UserServiceImpl.deActivateUser.end: deactivated user with id: {}", id);
 
     }
+
+    @Transactional
+    @Override
+    public void deleteUser(Long id) {
+        log.info("UserServiceImpl.deleteUser.start: deleting user with id: {}", id);
+
+        try {
+            var relatedDonations = donationRepository.findAllByUserId(id);
+            donationRepository.deleteAll(relatedDonations);
+
+            var relatedReports = reportRepository.findAllByUserId(id);
+            reportRepository.deleteAll(relatedReports);
+
+            var relatedIdeas = ideaRepository.findByUserId(id);
+            ideaRepository.deleteAll(relatedIdeas);
+
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            log.error("UserServiceImpl.deleteUser.error: error while deleting user with id: {}", id);
+            throw new RuntimeException("Error while deleting user with id: " + id, e);
+        }
+
+        log.info("UserServiceImpl.deleteUser.end: deleted user with id: {}", id);
+    }
+
 }

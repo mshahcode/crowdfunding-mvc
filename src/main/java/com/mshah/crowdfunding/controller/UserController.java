@@ -32,6 +32,13 @@ public class UserController {
         return "redirect:/v1/admin/panel";
     }
 
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return "redirect:/v1/admin/panel";
+    }
+
     @PostMapping("/signup")
     public String signUpUser(@Valid @ModelAttribute("registration") RegistrationDto registrationDto) {
         userService.signUpUser(registrationDto);

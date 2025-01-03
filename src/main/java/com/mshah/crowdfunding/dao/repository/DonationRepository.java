@@ -15,4 +15,8 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
             """)
     List<Donation> findAllByIdeaId(Long ideaId);
 
+    @Query("""
+            SELECT d FROM Donation d JOIN FETCH d.idea WHERE d.user.id  = :userId
+            """)
+    List<Donation> findAllByUserId(Long userId);
 }
