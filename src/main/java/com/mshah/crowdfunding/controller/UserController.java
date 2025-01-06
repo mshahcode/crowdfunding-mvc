@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +41,12 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signUpUser(@Valid @ModelAttribute("registration") RegistrationDto registrationDto) {
+    public String signUpUser(@Valid @ModelAttribute("registration") RegistrationDto registrationDto, BindingResult bindingResult) {
+
+        if(bindingResult.hasErrors()) {
+            return "signup";
+        }
+
         userService.signUpUser(registrationDto);
         return "redirect:/v1/ideas";
     }

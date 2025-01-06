@@ -20,4 +20,6 @@ public interface UserService {
     void deActivateUser(Long id);
 
     void deleteUser(Long id);
+
+    boolean isEmailPresent(String email);
 }

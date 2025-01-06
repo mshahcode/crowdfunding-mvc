@@ -127,4 +127,15 @@ public class UserServiceImpl implements UserService {
         log.info("UserServiceImpl.deleteUser.end: deleted user with id: {}", id);
     }
 
+    @Override
+    public boolean isEmailPresent(String email) {
+        log.info("UserServiceImpl.isEmailPresent.start: checking if user exists with email: {}", email);
+
+        var isEmailPresent = userRepository.findByEmail(email).isPresent();
+
+        log.info("UserServiceImpl.isEmailPresent.end: user exists with email: {}", email);
+
+        return isEmailPresent;
+    }
+
 }

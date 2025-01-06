@@ -1,5 +1,6 @@
 package com.mshah.crowdfunding.model.dto;
 
+import com.mshah.crowdfunding.validation.EmailValidation;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class RegistrationDto {
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
+    @EmailValidation
     private String email;
 
     @NotBlank(message = "Password is required")
