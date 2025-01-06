@@ -64,3 +64,16 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+#signup-section form ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px;
+    color: red;
+}
+
+#signup-section form li {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
