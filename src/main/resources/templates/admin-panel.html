@@ -113,7 +113,11 @@
                                 <td th:text="${user.roles}"></td>
                                 <td th:text="${user.isActive}"></td>
                                 <td>
-                                    <button class="btn btn-sm">Edit</button>
+                                    <form style="display:inline;" th:action="@{/v1/users/promote/{id}(id=${user.id})}"
+                                          method="post">
+                                        <input type="hidden" value="ADMIN" name="role" id="role">
+                                        <button class="btn btn-sm">Promote</button>
+                                    </form>
                                     <form style="display:inline;" th:action="@{/v1/users/delete/{id}(id=${user.id})}"
                                           method="post">
                                         <button class="btn btn-sm">Delete</button>
@@ -170,7 +174,7 @@
                                         <th>File Name</th>
                                         <th>Type</th>
                                         <th>Status</th>
-                                        <th>Updated At</th>
+                                        <th>Created At</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -180,11 +184,18 @@
                                         <td th:text="${report.fileName}"></td>
                                         <td th:text="${report.type}"></td>
                                         <td th:text="${report.status}"></td>
-                                        <td th:text="${#dates.format(report.updatedAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                        <td th:text="${#dates.format(report.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
                                         <td>
                                             <a th:if="${report.status.name() != 'ERROR' && report.status.name() != 'IN_PROGRESS'}"
                                                th:href="@{'/v1/reports/' + ${report.id} + '/download'}"
                                                class="btn btn-sm">Download</a>
+                                        </td>
+                                        <td>
+                                            <form th:if="${report.status.name() != 'IN_PROGRESS'}"
+                                                  th:action="@{'/v1/reports/' + ${report.id} + '/delete'}"
+                                                  method="post">
+                                                <button class="btn btn-sm">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                     </tbody>

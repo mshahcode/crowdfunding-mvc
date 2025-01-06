@@ -13,4 +13,6 @@ public interface ReportService {
     Resource downloadReport(Long id);
 
     List<Report> getAllReports();
+
+    void deleteReport(Long id);
 }

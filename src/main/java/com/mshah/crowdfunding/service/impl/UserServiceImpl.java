@@ -8,6 +8,7 @@ import com.mshah.crowdfunding.dao.repository.UserRepository;
 import com.mshah.crowdfunding.mapper.user.UserMapper;
 import com.mshah.crowdfunding.model.dto.RegistrationDto;
 import com.mshah.crowdfunding.model.dto.UserDto;
+import com.mshah.crowdfunding.model.enums.Role;
 import com.mshah.crowdfunding.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -136,6 +137,31 @@ public class UserServiceImpl implements UserService {
         log.info("UserServiceImpl.isEmailPresent.end: user exists with email: {}", email);
 
         return isEmailPresent;
+    }
+
+    @Override
+    @Transactional
+    public void promoteUser(Long id, Role role) {
+        log.info("UserServiceImpl.promoteUser.start: promoting user with id: {} to role: {}", id, role);
+
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+
+        var userRoles = user.getRoles();
+
+        if (userRoles.stream().anyMatch(r -> r.getName().name().equals(role.name()))) {
+            log.warn("UserServiceImpl.promoteUser.warn: user with id: {} already has role: {}", id, role);
+            return;
+        }
+
+        var roleEntity = new RoleEntity();
+        roleEntity.setName(role);
+
+        userRoles.add(roleEntity);
+
+        userRepository.save(user);
+
+        log.info("UserServiceImpl.promoteUser.end: promoted user with id: {} to role: {}", id, role);
     }
 
 }

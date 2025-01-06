@@ -1,6 +1,7 @@
 package com.mshah.crowdfunding.controller;
 
 import com.mshah.crowdfunding.model.dto.RegistrationDto;
+import com.mshah.crowdfunding.model.enums.Role;
 import com.mshah.crowdfunding.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/v1/users")
@@ -43,11 +45,19 @@ public class UserController {
     @PostMapping("/signup")
     public String signUpUser(@Valid @ModelAttribute("registration") RegistrationDto registrationDto, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "signup";
         }
 
         userService.signUpUser(registrationDto);
         return "redirect:/v1/ideas";
     }
+
+    @PostMapping("/promote/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String promoteUser(@PathVariable Long id, @RequestParam Role role) {
+        userService.promoteUser(id, role);
+        return "redirect:/v1/admin/panel";
+    }
+
 }

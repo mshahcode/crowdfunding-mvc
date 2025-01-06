@@ -2,6 +2,7 @@ package com.mshah.crowdfunding.service;
 
 import com.mshah.crowdfunding.model.dto.RegistrationDto;
 import com.mshah.crowdfunding.model.dto.UserDto;
+import com.mshah.crowdfunding.model.enums.Role;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface UserService {
     void deleteUser(Long id);
 
     boolean isEmailPresent(String email);
+
+    void promoteUser(Long id, Role role);
 }

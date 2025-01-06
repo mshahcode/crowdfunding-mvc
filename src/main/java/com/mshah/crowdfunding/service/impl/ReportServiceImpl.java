@@ -93,4 +93,11 @@ public class ReportServiceImpl implements ReportService {
         log.info("ReportServiceImpl.getAllReports.end: Fetched all reports");
         return reports;
     }
+
+    @Override
+    public void deleteReport(Long id) {
+        log.info("ReportServiceImpl.deleteReport.start: Deleting report with id: {}", id);
+        reportRepository.deleteById(id);
+        log.info("ReportServiceImpl.deleteReport.end: Report deleted with id: {}", id);
+    }
 }

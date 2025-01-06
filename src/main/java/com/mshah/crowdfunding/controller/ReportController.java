@@ -43,4 +43,11 @@ public class ReportController {
                 .header(HttpHeaders.CONTENT_TYPE, "text/csv")
                 .body(report);
     }
+
+    @PostMapping("/{id}/delete")
+    public String deleteReport(@PathVariable Long id) {
+        reportService.deleteReport(id);
+
+        return "redirect:/v1/admin/panel";
+    }
 }
