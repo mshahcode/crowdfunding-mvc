@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="d-flex flex-column min-vh-100" id="pageContainer">
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light shadow-sm">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,22 +37,26 @@
     </nav>
 
     <!-- Main Section -->
-    <div class="container mt-3 flex-grow-1" id="ideaDetails" style="background-color: #EEF1EF; border-radius: 40px;">
+    <div class="container mt-3 flex-grow-1" id="ideaDetails"
+         style="background-color: #F8F9FA; border-radius: 20px; padding: 30px;">
         <div class="row">
             <div class="col-12 mb-1 text-center">
-                <h3 style="font-weight: bold">Idea Details</h3>
+                <h2 class="fw-bold text-success">Idea Details</h2>
             </div>
         </div>
         <div class="row flex-wrap">
             <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
                 <div>
                     <img alt="Idea Image"
+                         class="img-fluid rounded shadow"
                          th:src="${ideaDto.imageUrl != null ? '/images/ideas/' + ideaDto.imageUrl : 'https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg'}">
                 </div>
-                <a th:if="${activeUser.nickname} != ${ideaDto.owner}"
-                   th:href="@{/v1/donations/ideas/{id}(id=${ideaDto.id})}">Fund this idea</a>
-                <form th:if="${activeUser.nickname} == ${ideaDto.owner}" th:action="@{/v1/ideas/delete/{id}(id=${ideaDto.id})}" method="post">
-                    <button type="submit" class="btn">
+                <a th:if="${activeUser.nickname != ideaDto.owner && ideaDto.status == 'IN_PROGRESS'}"
+                   class="btn btn-success w-100 mb-3 fw-bold" th:href="@{/v1/donations/ideas/{id}(id=${ideaDto.id})}">Fund
+                    this idea</a>
+                <form th:if="${activeUser.nickname} == ${ideaDto.owner}"
+                      th:action="@{/v1/ideas/delete/{id}(id=${ideaDto.id})}" method="post">
+                    <button type="submit" class="btn btn-danger w-100 fw-bold">
                         Delete Idea
                     </button>
                 </form>
@@ -95,33 +99,27 @@
                     </tr>
                     <tr>
                         <td>Status</td>
-                        <td th:if="${ideaDto.status == 'IN_PROGRESS'}">In Progress</td>
-                        <td th:if="${ideaDto.status == 'PROGRESS'}">Completed</td>
+                        <td th:if="${ideaDto.status == 'IN_PROGRESS'}" class="text-warning fw-bold">In Progress</td>
+                        <td th:if="${ideaDto.status == 'COMPLETED'}" class="text-success fw-bold">Completed</td>
                     </tr>
                 </table>
-                <h6 class="mt-3">Progress Bar</h6>
+                <h6 class="mt-3 text-center fw-bold">Progress Bar</h6>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
                          th:style="'width: ' + (${ideaDto.currentAmount} / ${ideaDto.goalAmount} * 100) + '%;'"
                          th:text="${#numbers.formatDecimal(ideaDto.currentAmount / ideaDto.goalAmount * 100, 1, 2)} + '%'">
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
+
     <!-- Footer -->
-    <footer class="text-center mt-4">
+    <footer class="text-center mt-4 bg-dark text-white py-3">
         <div class="container">
-            <div class="row">
-                <div class="col">
-                    <p>&copy; 2024 Crowdfunding Project</p>
-                </div>
-            </div>
+            <p class="mb-0">&copy; 2024 Crowdfunding Project</p>
         </div>
     </footer>
-
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
