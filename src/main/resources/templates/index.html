@@ -89,11 +89,9 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="sortOrder" class="form-label">Sort Order</label>
-                        <select id="sortOrder" name="sortOrder" class="form-select">
-                            <option value="asc" th:selected="${filter.sortOrder == 'asc'}">Ascending</option>
-                            <option value="desc" th:selected="${filter.sortOrder == 'desc'}">Descending</option>
-                        </select>
+                        <label style="display: block" class="form-label">Sort Order</label>
+                        <input type="radio" name="sortOrder" th:selected="${filter.sortOrder == 'asc'}" value="asc" />Ascending
+                        <input style="margin-left: 15px;" type="radio" name="sortOrder" th:selected="${filter.sortOrder == 'desc'}" value="desc" />Descending<br/>
                     </div>
                     <div class="row d-flex gap-1">
                         <div class="col">
