@@ -41,7 +41,7 @@ Inspired by **best coding practices, clean architecture, and design patterns**, 
     - **AES encryption** of card details (Card Number & CVV)
 
 ### 📊 Admin Panel & Reports
-- **Admins can generate reports asynchronously (CSV files)**
+- **Admins can generate reports asynchronously (CSV files):**
     - Implemented using **Java multithreading & Strategy Design Pattern**
     - Reports can have **IN_PROGRESS, ERROR, or COMPLETED** status
     - Downloading and deleting CSV reports available
