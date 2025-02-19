@@ -45,7 +45,7 @@ Inspired by **best coding practices, clean architecture, and design patterns**, 
     - Implemented using **Java multithreading & Strategy Design Pattern**
     - Reports can have **IN_PROGRESS, ERROR, or COMPLETED** status
     - Downloading and deleting CSV reports available
-- **Statistics Dashboard:**
+- **Statistics Dashboard**
     - Number of active/inactive users
     - Completed projects count
     - Full user list with management features
